@@ -17,6 +17,19 @@ export function TaskList() {
   function handleCreateNewTask() {
     // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
     //testando
+    if (!newTaskTitle) return;
+    // acima ele não cria a task caso o input esteja vazio
+    // id random: número aleatório. Não recomendado em aplicações sérias, apenas para aprendizado. 
+    const newTask = {
+      id: Math.random(), 
+      title: newTaskTitle,
+      isComplete: false
+
+    }
+    // oldState: valor antigo. abaixo salva o que já tinha, mais o que o usuário incluiu 
+    setTasks(oldState => [...oldState, newTask]);
+    // setNewTaskTitle(''); reseta o input
+    setNewTaskTitle('');
   }
 
   function handleToggleTaskCompletion(id: number) {
@@ -25,6 +38,7 @@ export function TaskList() {
 
   function handleRemoveTask(id: number) {
     // Remova uma task da listagem pelo ID
+    const filteredTasks = tasks.filter()
   }
 
   return (
@@ -38,7 +52,9 @@ export function TaskList() {
             placeholder="Adicionar novo todo" 
             onChange={(e) => setNewTaskTitle(e.target.value)}
             value={newTaskTitle}
-          />
+           // onChange={(e) => setNewTaskTitle(e.target.value)} value={newTaskTitle}
+           // componentes controlados pelo React
+/>
           <button type="submit" data-testid="add-task-button" onClick={handleCreateNewTask}>
             <FiCheckSquare size={16} color="#fff"/>
           </button>
